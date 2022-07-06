@@ -1,11 +1,10 @@
 package org.example;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
 import org.example.dao.CustomerDao;
 import org.example.entity.Customer;
 import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * Unit test for simple App.
@@ -36,5 +35,11 @@ public class AppTest
         CustomerDao.create(customer);
         Customer customer1 = CustomerDao.findByid(customer.getId());
         assertEquals("Alain",customer.getFirstName());
+    }
+
+    @Test
+    public void dontFindByid()
+    {
+        assertNull(CustomerDao.findByid(5L));
     }
 }
