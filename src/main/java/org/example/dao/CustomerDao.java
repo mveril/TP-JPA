@@ -16,4 +16,9 @@ public class CustomerDao {
         entityManager.persist(customerToCreate);
         tx.commit();
     }
+
+    public static Customer findByid(long id) {
+        EntityManager entityManager = EntityManagerSingleton.getEntityManager();
+        return entityManager.find(Customer.class, id);
+    }
 }
