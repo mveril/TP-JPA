@@ -2,6 +2,8 @@ package org.example;
 
 import static org.junit.Assert.assertTrue;
 
+import org.example.dao.CustomerDao;
+import org.example.entity.Customer;
 import org.junit.Test;
 
 /**
@@ -13,8 +15,14 @@ public class AppTest
      * Rigorous Test :-)
      */
     @Test
-    public void shouldAnswerWithTrue()
+    public void createCustomer()
     {
+
+        Customer customer = new Customer();
+        customer.setFirstName("Alain");
+        customer.setLastName("Delon");
+
+        CustomerDao.create(customer);
         assertTrue( true );
     }
 }

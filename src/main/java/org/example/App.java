@@ -13,11 +13,5 @@ public class App
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
-
-        Customer customer = new Customer();
-        customer.setFirstName("Alain");
-        customer.setLastName("Delon");
-
-        CustomerDao.create(customer);
     }
 }
