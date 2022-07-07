@@ -110,4 +110,15 @@ public class AppTest
         assertEquals("Belmondo", updatedCustomer.getLastName());
 
     }
+
+    @Test
+    public void updateCustomer2(){
+        Customer customer = new Customer();
+        customer.setFirstName("Alain");
+        customer.setLastName("Delon");
+        CustomerDAO.create(customer);
+        customer.setLastName("De loin");
+        CustomerDAO.update(customer);
+        assertEquals("De loin",CustomerDAO.findById(customer.getId()).getLastName());
+    }
 }

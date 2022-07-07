@@ -63,4 +63,17 @@ public class CustomerDAO {
             tx.rollback();
         }
     }
+
+    public static void update(Customer customer) {
+        EntityManager entityManager = EntityManagerSingleton.getEntityManager();
+        EntityTransaction tx = null;
+        try {
+            tx = entityManager.getTransaction();
+            tx.begin();
+            entityManager.merge(customer);
+            tx.commit();
+        } catch (Exception e) {
+            tx.rollback();
+        }
+    }
 }
