@@ -9,20 +9,28 @@ public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String address;
     private String city;
-    @Column(name = "company_name")
+    @Column(name="company_name")
     private String companyName;
     private String country;
     private String email;
-    @Column(name = "first_name")
+    @Column(name="first_name")
     private String firstName;
-    @Column(name = "last_name")
+    @Column(name="last_name")
     private String lastName;
     private String phone;
-    @Column(name = "zip_code")
+    @Column(name="zip_code")
     private String zipCode;
     private int state;
+
+    public Customer(){
+
+    }
+    public Customer(String firstName){
+        this.firstName = firstName;
+    }
 
 
     public Long getId() {

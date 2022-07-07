@@ -1,45 +1,65 @@
 package org.example;
 
-import org.example.dao.CustomerDao;
+import org.example.dao.CustomerDAO;
 import org.example.entity.Customer;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
-/**
- * Unit test for simple App.
- */
-public class AppTest 
+public class AppTest
 {
-    /**
-     * Rigorous Test :-)
-     */
     @Test
     public void createCustomer()
     {
-
         Customer customer = new Customer();
         customer.setFirstName("Alain");
         customer.setLastName("Delon");
+        CustomerDAO.create(customer);
 
-        CustomerDao.create(customer);
         assertTrue( true );
     }
 
     @Test
-    public void findByid()
-    {
+    public void findById(){
         Customer customer = new Customer();
         customer.setFirstName("Alain");
         customer.setLastName("Delon");
-        CustomerDao.create(customer);
-        Customer customer1 = CustomerDao.findByid(customer.getId());
-        assertEquals("Alain",customer.getFirstName());
+        CustomerDAO.create(customer);
+
+        Customer customer1 = CustomerDAO.findById(customer.getId());
+        assertEquals("Alain", customer1.getFirstName());
     }
 
     @Test
-    public void dontFindByid()
-    {
-        assertNull(CustomerDao.findByid(5L));
+    public void dontFindById() {
+        Customer customer = CustomerDAO.findById(5);
+        assertNull(customer);
+    }
+
+    @Test
+    public void findAll() {
+
+        CustomerDAO.create(new Customer("Marie"));
+        CustomerDAO.create(new Customer("Michel"));
+        CustomerDAO.create(new Customer("Alex"));
+
+        List<Customer> customers = CustomerDAO.findAll();
+        assertEquals(3, customers.size());
+    }
+
+    @Test
+    public void deleteCustomer(){
+        Customer marie = new Customer("Marie");
+        CustomerDAO.create(marie);
+
+        List<Customer> customers = CustomerDAO.findAll();
+        assertEquals(1, customers.size());
+
+        CustomerDAO.delete(marie);
+
+        customers = CustomerDAO.findAll();
+        assertEquals(0, customers.size());
     }
 }
