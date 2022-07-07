@@ -42,4 +42,8 @@ public class CustomerDAO {
         entityManager.remove(customer);
         tx.commit();
     }
+
+    public static void delete(long customerId) {
+        delete(findById(customerId));
+    }
 }
