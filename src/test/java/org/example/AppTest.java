@@ -2,8 +2,10 @@ package org.example;
 
 import org.example.dao.CustomerDAO;
 import org.example.entity.Customer;
+import org.example.jpa.EntityManagerSingleton;
 import org.junit.Test;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -76,5 +78,36 @@ public class AppTest
 
         customers = CustomerDAO.findAll();
         assertEquals(0, customers.size());
+    }
+
+    @Test
+    public void updateCustomer(){
+        Customer customer = new Customer();
+        customer.setFirstName("Alain");
+        customer.setLastName("Delon");
+        customer.setAddress("rue de la mairie");
+        customer.setCity("Paris");
+        customer.setCompanyName("Google");
+        customer.setCountry("France");
+        customer.setEmail("alain@delon.fr");
+        customer.setPhone("060606060606");
+        customer.setZipCode("75000");
+        customer.setState(1);
+        CustomerDAO.create(customer);
+
+        /*****************/
+
+        Customer newCustomerData = new Customer();
+        newCustomerData.setFirstName("Jean-Paul");
+        newCustomerData.setLastName("Belmondo");
+
+        CustomerDAO.update(customer.getId(), newCustomerData);
+
+        /*****************/
+
+        Customer updatedCustomer = CustomerDAO.findById(customer.getId());
+        assertEquals("Jean-Paul", updatedCustomer.getFirstName());
+        assertEquals("Belmondo", updatedCustomer.getLastName());
+
     }
 }
